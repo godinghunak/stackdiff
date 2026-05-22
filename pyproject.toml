@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "stackdiff"
+version = "0.1.0"
+description = "Compares two Docker Compose files and summarises service-level changes."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["docker", "compose", "diff", "devops"]
+
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+
+[project.scripts]
+stackdiff = "stackdiff.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["stackdiff*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short"
+
+[tool.coverage.run]
+source = ["stackdiff"]
+omit = ["tests/*"]
